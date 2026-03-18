@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marta Caleja</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap');
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        html,body{width:100%;height:100%;background:#000;color:#fff;font-family:'Space Mono',monospace;overflow-x:hidden;overflow-y:auto;scroll-behavior:smooth;scrollbar-width:none;}
+        html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;}
+        nav{position:fixed;top:0;left:0;width:100%;z-index:3000;display:flex;justify-content:center;align-items:center;padding:20px 44px;letter-spacing:0.13em;font-size:11px;text-transform:uppercase;animation:fadeDown 0.8s 0.2s both;}
+        nav a{color:#fff;text-decoration:none;opacity:0.65;position:relative;transition:opacity .2s;cursor:pointer;}
+        nav a:not(.nav-contact)::after{content:'';position:absolute;left:0;bottom:-3px;width:0;height:1px;background:#f5e642;transition:width .3s cubic-bezier(.23,1,.32,1);}
+        nav a:not(.nav-contact):hover{opacity:1;}nav a:not(.nav-contact):hover::after{width:100%;}
+        .nav-contact{position:absolute;right:44px;border:1px solid rgba(255,255,255,0.45);padding:5px 14px;transition:background .22s,color .22s,border-color .22s,opacity .22s;}
+        .nav-contact:hover{background:#fff;color:#000!important;border-color:#fff;opacity:1;}
+        .nav-links{display:flex;gap:60px;align-items:center;}
+        @keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+        .hero{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;position:relative;}
+        .corner-left{position:absolute;left:44px;top:50%;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.35;writing-mode:vertical-rl;transform:translateY(-50%) rotate(180deg);z-index:1;}
+        .corner-right{position:absolute;right:44px;top:50%;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.35;writing-mode:vertical-rl;transform:translateY(-50%);z-index:1;}
+        .scene{position:relative;width:260px;height:390px;animation:sceneIn 1s 0.4s cubic-bezier(.16,1,.3,1) both;}
+        @keyframes sceneIn{from{opacity:0;transform:scale(0.88)}to{opacity:1;transform:scale(1)}}
+        .wallet{position:absolute;top:0;left:0;width:260px;height:390px;border-radius:18px;background:linear-gradient(160deg,#2a2a2a 0%,#0d0d0d 100%);box-shadow:0 40px 100px rgba(0,0,0,.95),0 8px 30px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,0.06);overflow:hidden;z-index:10;}
+        .wallet-slot{position:absolute;right:0;top:50%;transform:translateY(-50%);width:6px;height:65%;background:#000;border-radius:4px 0 0 4px;box-shadow:inset 3px 0 8px rgba(0,0,0,1);}
+        .wallet-logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:0.5em;color:rgba(245,230,66,0.35);white-space:nowrap;user-select:none;writing-mode:vertical-rl;}
+        .wallet-ridge{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);width:50px;height:6px;border-radius:3px;background:linear-gradient(to bottom,#383838,#181818);}
+        .card{position:absolute;top:0;left:0;width:260px;height:390px;border-radius:16px;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;overflow:hidden;cursor:pointer;opacity:0;pointer-events:none;}
+        .card[data-i="0"]{background:linear-gradient(160deg,#4ecdc4,#0b5e5a);color:#fff;z-index:9;}
+        .card[data-i="1"]{background:linear-gradient(160deg,#ff6b6b,#a82020);color:#fff;z-index:8;}
+        .card[data-i="2"]{background:linear-gradient(160deg,#f5e642,#c8a800);color:#111;z-index:7;}
+        .card[data-i="3"]{background:linear-gradient(160deg,#fb923c,#a83205);color:#fff;z-index:5;}
+        .card[data-i="4"]{background:linear-gradient(160deg,#a78bfa,#4c1d95);color:#fff;z-index:4;}
+        .card-number{font-family:'Bebas Neue',sans-serif;font-size:52px;opacity:0.15;position:absolute;top:16px;right:20px;}
+        .card-title{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:0.06em;line-height:1;}
+        .card-sub{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;opacity:0.5;margin-top:6px;}
+        .card::after{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,0.18) 0%,transparent 50%);pointer-events:none;}
+        .scroll-hint{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.3;z-index:1;}
+        .scroll-arrow{width:1px;height:26px;background:rgba(255,255,255,0.4);animation:scrollPulse 1.8s ease-in-out infinite;}
+        @keyframes scrollPulse{0%,100%{transform:scaleY(1);opacity:0.4}50%{transform:scaleY(0.3);opacity:0.08}}
+        .about-section{width:100%;height:100vh;overflow:hidden;background:#000;}
+        .about-scroll{width:100%;height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none;}
+        .about-scroll::-webkit-scrollbar{display:none;}
+        .about-snap-1{height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:80px 44px;position:relative;}
+        .about-scroll-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.3;pointer-events:none;}
+        .about-scroll-arrow{width:1px;height:20px;background:rgba(255,255,255,0.4);animation:scrollPulse 1.8s ease-in-out infinite;}
+        .about-card-wrap{width:100%;max-width:900px;perspective:1200px;}
+        .flip-card{width:100%;height:480px;position:relative;transform-style:preserve-3d;transition:transform 0.9s cubic-bezier(.16,1,.3,1);cursor:pointer;}
+        .about-card-wrap:hover .flip-card{transform:rotateY(180deg);}
+        .flip-front,.flip-back{position:absolute;inset:0;border-radius:6px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;overflow:hidden;}
+        .flip-front{background:#f5e642;color:#111;border:1px solid rgba(0,0,0,0.08);}
+        .flip-front::before,.flip-front::after,.flip-back::before,.flip-back::after{content:'';position:absolute;width:8px;height:8px;border-radius:50%;background:#111;opacity:0.35;}
+        .flip-front::before{top:14px;left:14px;}.flip-front::after{bottom:14px;left:14px;}
+        .front-topbar{position:absolute;top:0;left:0;right:0;height:38px;border-bottom:1px dashed rgba(0,0,0,0.2);display:flex;align-items:center;padding:0 18px;gap:20px;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.5;}
+        .front-topbar span:last-child{margin-left:auto;}
+        .front-botbar{position:absolute;bottom:0;left:0;right:0;height:38px;border-top:1px dashed rgba(0,0,0,0.2);display:flex;align-items:center;padding:0 18px;gap:40px;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.5;}
+        .front-botbar span:last-child{margin-left:auto;}
+        .front-left{width:42%;border-right:1px dashed rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;padding-top:38px;padding-bottom:38px;}
+        .about-mini-card{width:150px;height:220px;border-radius:12px;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.25);animation:cardFloat 4s ease-in-out infinite;}
+        @keyframes cardFloat{0%,100%{transform:translateY(0px) rotate(-2deg)}50%{transform:translateY(-10px) rotate(-2deg)}}
+        .about-mini-card::after{content:'';position:absolute;inset:0;border-radius:12px;background:linear-gradient(145deg,rgba(255,255,255,0.2) 0%,transparent 55%);pointer-events:none;}
+        .mini-card-number{font-family:'Bebas Neue',sans-serif;font-size:32px;opacity:0.2;position:absolute;top:10px;right:12px;}
+        .mini-card-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.06em;line-height:1;}
+        .mini-card-sub{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.55;margin-top:3px;}
+        .front-right{flex:1;padding:58px 36px 40px 40px;display:flex;flex-direction:column;justify-content:flex-end;gap:20px;}
+        .does-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,3.5vw,44px);letter-spacing:0.03em;line-height:1.1;color:#111;}
+        .does-cycling{position:relative;height:52px;overflow:hidden;margin-top:24px;}
+        .does-word{position:absolute;left:0;top:0;font-family:Georgia,serif;font-style:italic;font-size:clamp(26px,3vw,40px);color:#111;opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;white-space:nowrap;}
+        .does-word.active{opacity:1;transform:translateY(0);}
+        .front-bio{font-size:11px;letter-spacing:0.12em;line-height:1.9;text-transform:uppercase;opacity:0.75;max-width:400px;}
+        .front-hint{font-size:9px;letter-spacing:0.2em;opacity:0.35;margin-top:12px;text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+        .front-hint::before{content:'';display:inline-block;width:20px;height:1px;background:#111;opacity:0.4;}
+        .flip-back{background:#111;color:#fff;transform:rotateY(180deg);align-items:center;justify-content:center;flex-direction:column;gap:24px;border:1px solid rgba(255,255,255,0.06);}
+        .flip-back::before{background:#f5e642;top:14px;left:14px;opacity:0.6;}
+        .flip-back::after{background:#f5e642;bottom:14px;left:14px;opacity:0.6;}
+        .back-label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.3;}
+        .back-readmore{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,8vw,110px);letter-spacing:0.06em;color:#f5e642;line-height:1;text-decoration:none;position:relative;}
+        .back-readmore::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:#f5e642;transition:width 0.4s cubic-bezier(.16,1,.3,1);}
+        .flip-back:hover .back-readmore::after{width:100%;}
+        .back-sub{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;opacity:0.25;}
+        .aboutme-section{width:100%;background:#000;display:flex;align-items:flex-start;justify-content:center;padding:100px 60px 60px;}
+        .aboutme-inner{width:100%;max-width:1100px;display:flex;flex-direction:column;gap:50px;}
+        .am-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,80px);line-height:0.9;letter-spacing:0.03em;color:#fff;text-align:left;}
+        .papers-stage{position:relative;width:100%;height:640px;overflow:visible;}
+        .paper{position:absolute;background:#f5f0e8;border-radius:4px;padding:28px 24px 24px;width:240px;transform:rotate(var(--r,0deg));box-shadow:0 6px 24px rgba(0,0,0,.55),0 1px 4px rgba(0,0,0,.3);cursor:grab;user-select:none;transition:box-shadow 0.2s ease;}
+        .paper.dragging{cursor:grabbing;box-shadow:0 28px 80px rgba(0,0,0,.85),0 4px 12px rgba(0,0,0,.5);transform:rotate(1deg) scale(1.03);transition:none;}
+        .paper-wide{width:500px;background-color:#f5f0e8;background-image:repeating-linear-gradient(to bottom,transparent 0px,transparent 31px,rgba(0,0,0,0.09) 31px,rgba(0,0,0,0.09) 32px);background-size:100% 32px;padding:28px 28px 28px 58px;}
+        .paper-wide::before{content:'';position:absolute;left:42px;top:0;bottom:0;width:1px;background:rgba(210,60,60,0.3);pointer-events:none;}
+        .paper-wide .paper-text{font-size:14px;line-height:32px;color:#1a1a2e;letter-spacing:0.01em;}
+        .paper-pin{position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#ddd,#888);box-shadow:0 2px 6px rgba(0,0,0,.5);pointer-events:none;}
+        .paper-pin-dark{background:radial-gradient(circle at 40% 35%,#555,#111);}
+        .paper-tag{font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(0,0,0,0.35);margin-bottom:14px;font-family:'Space Mono',monospace;pointer-events:none;}
+        .paper-tag-dark{color:rgba(0,0,0,0.5);}
+        .paper-text{font-size:11px;line-height:1.75;color:#222;font-family:'Space Mono',monospace;letter-spacing:0.02em;pointer-events:none;}
+        .paper-text strong{font-weight:700;color:#000;}
+        .paper-link{display:flex;align-items:center;gap:10px;font-size:10px;color:#111;text-decoration:none;font-family:'Space Mono',monospace;letter-spacing:0.03em;padding:9px 0;border-bottom:1px dashed rgba(0,0,0,0.15);transition:gap 0.2s;}
+        .paper-link:last-child{border-bottom:none;}.paper-link:hover{gap:14px;}
+        .link-icon{font-size:12px;opacity:0.5;width:16px;text-align:center;}
+        .paper-accent{background:#f5e642;}
+        .paper-text-dark{font-size:11px;line-height:1.7;color:#333;font-family:'Space Mono',monospace;letter-spacing:0.02em;margin-bottom:18px;pointer-events:none;}
+        .resume-btn{display:inline-flex;align-items:center;gap:10px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.1em;color:#000;text-decoration:none;border-bottom:2px solid #000;padding-bottom:4px;transition:gap 0.2s;}
+        .resume-btn:hover{gap:18px;}
+        .float-photo{position:absolute;right:-40px;bottom:-20px;height:580px;width:auto;z-index:0;pointer-events:none;filter:drop-shadow(0 30px 60px rgba(0,0,0,0.7));opacity:0.92;}
+        .skills-section{width:100%;background:#000;display:flex;align-items:center;justify-content:center;padding:120px 60px 160px;}
+        .skills-inner{width:100%;max-width:1100px;display:flex;align-items:center;justify-content:center;}
+        .scrunch-wrap{position:relative;cursor:pointer;width:820px;height:520px;display:flex;align-items:center;justify-content:center;}
+        .scrunch-closed{position:absolute;width:280px;height:280px;top:50%;left:50%;transform:translate(-50%,-50%);transition:transform 0.7s cubic-bezier(.16,1,.3,1),opacity 0.5s ease;z-index:2;pointer-events:none;}
+        .crumple-img{width:100%;height:100%;object-fit:contain;mix-blend-mode:screen;filter:sepia(1) saturate(8) hue-rotate(10deg) brightness(1.05) drop-shadow(0 18px 45px rgba(0,0,0,0.9)) drop-shadow(0 4px 12px rgba(0,0,0,0.6));display:block;}
+        .scrunch-label{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.28);white-space:nowrap;transition:opacity 0.3s;z-index:3;pointer-events:none;}
+        .paper-flip-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.06) rotate(35deg);transform-origin:center center;width:820px;opacity:0;pointer-events:none;transition:transform 0.75s cubic-bezier(.16,1,.3,1),opacity 0.45s ease;perspective:1400px;perspective-origin:center center;z-index:1;}
+        .scrunch-wrap:hover .scrunch-closed{transform:translate(-50%,-50%) scale(0.06);opacity:0;}
+        .scrunch-wrap:hover .scrunch-label{opacity:0;}
+        .scrunch-wrap:hover .paper-flip-wrap{transform:translate(-50%,-50%) scale(1) rotate(-1.5deg);opacity:1;pointer-events:all;}
+        .paper-flipper{width:100%;height:460px;position:relative;transform-style:preserve-3d;transition:transform 0.8s cubic-bezier(.16,1,.3,1);cursor:pointer;}
+        .paper-flipper.flipped{transform:rotateX(180deg);}
+        .paper-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:2px;padding:44px 50px 52px 86px;background-color:#f5e642;background-image:repeating-linear-gradient(to bottom,transparent 0px,transparent 31px,rgba(0,0,0,0.07) 31px,rgba(0,0,0,0.07) 32px);background-size:100% 32px;box-shadow:0 50px 130px rgba(0,0,0,0.95),0 8px 30px rgba(0,0,0,0.6);overflow:hidden;}
+        .paper-face::before{content:'';position:absolute;left:64px;top:0;bottom:0;width:1px;background:rgba(190,40,40,0.4);pointer-events:none;}
+        .paper-face::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 32%,rgba(0,0,0,0.04) 33%,transparent 34%,transparent 65%,rgba(0,0,0,0.04) 66%,transparent 67%),linear-gradient(to right,transparent 48%,rgba(0,0,0,0.04) 49%,transparent 51%);pointer-events:none;border-radius:2px;}
+        .paper-back{transform:rotateX(180deg);}
+        .paper-click-hint{position:absolute;bottom:20px;right:28px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(0,0,0,0.5);font-family:'Bebas Neue',sans-serif;pointer-events:none;}
+        .skills-grid{display:grid;grid-template-columns:1.1fr 1fr 0.9fr;gap:0 48px;}
+        .sk-col-title{font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(0,0,0,0.65);margin-bottom:6px;font-family:'Bebas Neue',sans-serif;border-bottom:2px solid rgba(0,0,0,0.25);padding-bottom:4px;line-height:36px;}
+        .sk-row{display:flex;align-items:baseline;gap:10px;line-height:32px;}
+        .sk-num{font-size:9px;color:rgba(0,0,0,0.28);width:18px;flex-shrink:0;font-family:'Space Mono',monospace;}
+        .sk-name{font-size:13px;color:#1a1a1a;letter-spacing:0.02em;font-family:'Space Mono',monospace;}
+        .sk-soft{font-size:16px;color:#1a1a1a;font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em;line-height:32px;}
+        .sk-lang{font-size:12px;color:#1a1a1a;font-family:'Space Mono',monospace;letter-spacing:0.02em;line-height:32px;}
+        .sk-level{font-size:9px;color:rgba(0,0,0,0.38);margin-left:5px;}
+        .edu-title{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.25em;color:rgba(0,0,0,0.65);margin-bottom:36px;border-bottom:2px solid rgba(0,0,0,0.25);padding-bottom:4px;line-height:36px;}
+        .edu-block{margin-bottom:40px;}
+        .edu-period{font-size:9px;letter-spacing:0.25em;color:rgba(0,0,0,0.38);font-family:'Space Mono',monospace;margin-bottom:8px;text-transform:uppercase;}
+        .edu-degree{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.06em;color:#111;line-height:1.1;margin-bottom:6px;}
+        .edu-school{font-size:12px;color:rgba(0,0,0,0.55);font-family:'Space Mono',monospace;letter-spacing:0.02em;line-height:1.6;}
+        .works-overlay{position:fixed;inset:0;z-index:1500;background:linear-gradient(160deg,#1c1408 0%,#0d0a04 40%,#0f0b05 60%,#1a1208 100%);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.45s cubic-bezier(.16,1,.3,1);}
+        .works-overlay.open{opacity:1;pointer-events:all;}
+        .works-overlay::before{content:'';position:absolute;inset:32px;border:1px solid rgba(245,230,66,0.05);border-radius:6px;pointer-events:none;}
+        .works-overlay::after{content:'';position:absolute;left:50%;top:8%;bottom:8%;width:1px;background:linear-gradient(to bottom,transparent,rgba(245,230,66,0.07) 30%,rgba(245,230,66,0.07) 70%,transparent);transform:translateX(-50%);pointer-events:none;}
+        .works-close{position:absolute;top:90px;right:44px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.3);cursor:pointer;transition:color .2s;border:none;background:none;font-family:'Space Mono',monospace;}
+        .works-close:hover{color:#f5e642;}
+        .works-heading{position:absolute;top:80px;left:50%;transform:translateX(-50%);font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:0.5em;text-transform:uppercase;color:rgba(245,230,66,0.22);white-space:nowrap;}
+        .works-label-l{position:absolute;left:52px;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,230,66,0.15);user-select:none;}
+        .works-label-r{position:absolute;right:52px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,230,66,0.15);user-select:none;}
+        .slots-grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:24px;width:min(820px,80vw);}
+        .slot{position:relative;height:185px;cursor:pointer;}
+        .slot-pocket{position:absolute;inset:0;border-radius:10px;background:linear-gradient(170deg,#0a0702,#060401);box-shadow:inset 0 4px 24px rgba(0,0,0,0.95),inset 0 1px 0 rgba(255,255,255,0.02);border:1px solid rgba(245,230,66,0.04);overflow:hidden;}
+        .slot-pocket::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.5) 0%,transparent 40%);border-radius:10px;pointer-events:none;}
+        .slot-card{position:absolute;left:0;right:0;bottom:-4px;height:172px;border-radius:10px;padding:22px 24px 20px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform 0.45s cubic-bezier(.16,1,.3,1),box-shadow 0.45s,filter 0.3s;overflow:hidden;will-change:transform;}
+        .slot-card::after{content:'';position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,255,255,0.13) 0%,transparent 55%);pointer-events:none;border-radius:10px;}
+        .slot:nth-child(1) .slot-card{background:linear-gradient(160deg,#4ecdc4,#0a4a46);}
+        .slot:nth-child(2) .slot-card{background:linear-gradient(160deg,#ff6b6b,#8a1818);}
+        .slot:nth-child(3) .slot-card{background:linear-gradient(160deg,#f5e642,#b89800);}
+        .slot:nth-child(4) .slot-card{background:linear-gradient(160deg,#fb923c,#8a2800);}
+        .slot:nth-child(5) .slot-card{background:linear-gradient(160deg,#a78bfa,#4c1d95);}
+        .slot:nth-child(1) .slot-num,.slot:nth-child(1) .slot-title,.slot:nth-child(1) .slot-sub{color:#fff;}
+        .slot:nth-child(2) .slot-num,.slot:nth-child(2) .slot-title,.slot:nth-child(2) .slot-sub{color:#fff;}
+        .slot:nth-child(3) .slot-num,.slot:nth-child(3) .slot-title,.slot:nth-child(3) .slot-sub{color:#111;}
+        .slot:nth-child(4) .slot-num,.slot:nth-child(4) .slot-title,.slot:nth-child(4) .slot-sub{color:#fff;}
+        .slot:nth-child(5) .slot-num,.slot:nth-child(5) .slot-title,.slot:nth-child(5) .slot-sub{color:#fff;}
+        .slot-wide{grid-column:span 2;}
+        .slot-num{position:absolute;top:12px;right:16px;font-family:'Bebas Neue',sans-serif;font-size:70px;line-height:1;opacity:0.08;pointer-events:none;transition:opacity 0.3s;}
+        .slot-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,3.5vw,46px);letter-spacing:0.06em;line-height:1;transition:letter-spacing 0.3s;}
+        .slot-sub{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;opacity:0.5;margin-top:5px;transition:opacity 0.3s;}
+        .slot-arrow{position:absolute;bottom:20px;right:20px;font-size:15px;opacity:0;transition:opacity 0.3s,transform 0.3s;transform:translateX(-10px);}
+        .slots-grid:hover .slot-card{filter:brightness(0.35);transform:none;box-shadow:none;}
+        .slots-grid:hover .slot:hover .slot-card{filter:brightness(1.1);transform:translateY(-28px);box-shadow:0 30px 70px rgba(0,0,0,0.9),0 8px 20px rgba(0,0,0,0.5);}
+        .slot:hover .slot-num{opacity:0.13;}.slot:hover .slot-title{letter-spacing:0.10em;}.slot:hover .slot-sub{opacity:0.75;}.slot:hover .slot-arrow{opacity:1;transform:translateX(0);}
+        .slot-card.ejecting{transition:transform 0.45s cubic-bezier(.4,0,.2,1),opacity 0.35s ease!important;transform:translateY(-220px)!important;opacity:0!important;}
+        .cat-overlay{position:fixed;inset:0;z-index:1600;background:#000;overflow-y:auto;opacity:0;pointer-events:none;transform:translateY(30px);transition:opacity 0.4s cubic-bezier(.16,1,.3,1),transform 0.4s cubic-bezier(.16,1,.3,1);}
+        .cat-overlay.open{opacity:1;pointer-events:all;transform:translateY(0);}
+        .cat-top{padding:100px 60px 0;}
+        .cat-back-btn{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35);cursor:pointer;transition:color .2s,gap .2s;border:none;background:none;font-family:'Space Mono',monospace;margin-bottom:40px;}
+        .cat-back-btn:hover{color:#f5e642;gap:12px;}
+        .cat-back-btn::before{content:'\2190';}
+        .cat-num{font-size:13px;letter-spacing:0.3em;color:rgba(255,255,255,0.2);text-transform:uppercase;margin-bottom:12px;}
+        .cat-big-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,12vw,160px);letter-spacing:0.04em;line-height:0.85;color:#fff;}
+        .cat-list-header{display:flex;justify-content:space-between;padding:24px 60px;border-bottom:1px solid rgba(255,255,255,0.08);margin-top:48px;}
+        .cat-list-header-left,.cat-list-header-right{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);}
+        .proj-row{display:flex;align-items:center;justify-content:space-between;padding:0 60px;border-bottom:1px solid rgba(255,255,255,0.1);cursor:pointer;transition:filter 0.25s;min-height:120px;overflow:hidden;}
+        .proj-row:hover{filter:brightness(1.25);}
+        .proj-row-left{display:flex;flex-direction:column;gap:10px;z-index:2;padding:28px 0;}
+        .proj-row-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,3.5vw,46px);letter-spacing:0.04em;color:#fff;transition:color 0.2s;}
+        .proj-row:hover .proj-row-title{color:#f5e642;}
+        .proj-row-tags{display:flex;gap:12px;}
+        .proj-row-tag{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);}
+        .proj-row-right{width:320px;height:160px;overflow:hidden;border-radius:4px;flex-shrink:0;position:relative;z-index:2;}
+        .proj-row-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s cubic-bezier(.16,1,.3,1),filter 0.3s;filter:brightness(0.9);}
+        .proj-row:hover .proj-row-img{transform:scale(1.04);filter:brightness(1.05);}
+        .proj-row-arrow{position:absolute;bottom:10px;right:10px;font-size:14px;color:#f5e642;opacity:0;transition:opacity 0.25s,transform 0.25s;transform:translate(-4px,4px);}
+        .proj-row:hover .proj-row-arrow{opacity:1;transform:translate(0,0);}
+        .cat-empty{padding:80px 60px;font-size:14px;letter-spacing:0.15em;color:rgba(255,255,255,0.18);text-transform:uppercase;}
+        .cat-overlay-footer{padding:50px 60px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);}
+        .cat-overlay-footer-back{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.25);cursor:pointer;transition:color .2s,gap .2s;border:none;background:none;font-family:'Space Mono',monospace;}
+        .cat-overlay-footer-back:hover{color:#f5e642;gap:12px;}
+        .cat-overlay-footer-back::before{content:'\2190';}
+        .cat-overlay-footer-copy{font-size:9px;letter-spacing:0.15em;color:rgba(255,255,255,0.1);text-transform:uppercase;}
+        .proj-overlay{position:fixed;inset:0;z-index:1700;background:#000;overflow-y:auto;opacity:0;pointer-events:none;transform:translateY(40px);transition:opacity 0.4s cubic-bezier(.16,1,.3,1),transform 0.4s cubic-bezier(.16,1,.3,1);}
+        .proj-overlay.open{opacity:1;pointer-events:all;transform:translateY(0);}
+        .proj-header{padding:100px 60px 48px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:flex-end;justify-content:space-between;}
+        .proj-back-btn{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35);cursor:pointer;transition:color .2s,gap .2s;border:none;background:none;font-family:'Space Mono',monospace;}
+        .proj-back-btn:hover{color:#f5e642;gap:12px;}
+        .proj-back-btn::before{content:'\2190';}
+        .proj-info{display:flex;flex-direction:column;gap:6px;text-align:right;}
+        .proj-cat-label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,230,66,0.5);}
+        .proj-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4.5vw,62px);letter-spacing:0.04em;line-height:0.9;color:#fff;}
+        .proj-year{font-size:10px;letter-spacing:0.2em;color:rgba(255,255,255,0.22);text-transform:uppercase;margin-top:4px;}
+        .proj-intro{display:grid;grid-template-columns:1.2fr 0.8fr;gap:60px;padding:60px;}
+        .proj-desc-title{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.3em;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:16px;}
+        .proj-desc-text{font-size:14px;line-height:1.9;color:rgba(255,255,255,0.6);letter-spacing:0.01em;}
+        .proj-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+        .proj-tag{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#f5e642;border:1px solid rgba(245,230,66,0.3);padding:5px 12px;border-radius:2px;}
+        .proj-links{display:flex;flex-direction:column;gap:20px;margin-top:28px;}
+        .proj-link-label{font-size:9px;letter-spacing:0.22em;color:rgba(255,255,255,0.28);text-transform:uppercase;margin-bottom:4px;}
+        .proj-link{display:inline-flex;align-items:center;gap:10px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.1em;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:8px;transition:color .2s,gap .2s;}
+        .proj-link:hover{color:#f5e642;gap:14px;}
+        .proj-meta{display:flex;flex-direction:column;gap:28px;}
+        .proj-meta-item{display:flex;flex-direction:column;gap:5px;}
+        .proj-meta-label{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.22);}
+        .proj-meta-value{font-size:13px;letter-spacing:0.03em;color:rgba(255,255,255,0.65);line-height:1.6;}
+        .proj-img-section{padding:0 60px 60px;}
+        .proj-img-label{font-size:10px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:16px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.05);}
+        .proj-img-grid{display:grid;gap:3px;}
+        .proj-img-grid.cols-2{grid-template-columns:1fr 1fr;}
+        .proj-img-grid.cols-1{grid-template-columns:1fr;}
+        .proj-img-grid.cols-3{grid-template-columns:1fr 1fr 1fr;}
+        .proj-img-grid img{width:100%;display:block;object-fit:contain;background:#0a0a0a;}
+        .proj-footer{padding:50px 60px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);}
+        .proj-footer-copy{font-size:9px;letter-spacing:0.15em;color:rgba(255,255,255,0.1);text-transform:uppercase;}
+
+        /* ===== MONEGROS PROJECT LAYOUT ===== */
+        .mn-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:calc(100vh - 180px);}
+        .mn-col-info{padding:60px 60px 60px 60px;border-right:1px solid rgba(255,255,255,0.06);position:sticky;top:0;max-height:100vh;overflow-y:auto;scrollbar-width:none;}
+        .mn-col-info::-webkit-scrollbar{display:none;}
+        .mn-col-imgs{padding:60px 60px 60px 60px;}
+        .mn-divider{width:100%;height:1px;background:rgba(255,255,255,0.06);margin:32px 0;}
+        .mn-block{margin-bottom:36px;}
+        .mn-img-single{width:40%;margin:0 auto;}
+        .mn-img-single img{width:100%;display:block;object-fit:contain;}
+        .mn-caption{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.25);font-family:'Space Mono',monospace;margin-top:8px;}
+        .mn-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;width:40%;margin:0 auto;}
+        .mn-pair-item img{width:100%;height:180px;display:block;object-fit:contain;}
+        .mn-cartaz{height:560px!important;}
+        .mn-trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:80%;margin:0 auto;}
+        .mn-trio-item img{width:100%;height:180px;display:block;object-fit:contain;}
+        .mn-pair-item img{width:100%;height:180px;display:block;object-fit:contain;}
+        .mn-cartaz{height:560px!important;}
+
+        .mn-proj-link{display:inline-flex;align-items:center;gap:10px;font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.12em;color:#f5e642;text-decoration:none;border-bottom:2px solid rgba(245,230,66,0.3);padding-bottom:6px;transition:color .2s,gap .2s,border-color .2s;margin-bottom:4px;}
+        .mn-proj-link:hover{gap:16px;border-color:#f5e642;}
+        .mn-proj-link-label{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:10px;display:block;}
+        .mn-meta-row{display:flex;gap:0;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);margin-top:48px;}
+        .mn-meta-item{flex:1;padding:40px 36px;border-right:1px solid rgba(255,255,255,0.06);}
+        .mn-meta-item:last-child{border-right:none;}
+        .mn-meta-links{display:flex;flex-direction:column;justify-content:flex-start;gap:4px;}
+
+
+        /* ===== CUSTOM CURSOR ===== */
+        *{cursor:none!important;}
+        #cursor{position:fixed;top:0;left:0;width:10px;height:10px;border-radius:50%;background:#f5e642;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width 0.2s ease,height 0.2s ease,background 0.2s ease,border-radius 0.2s ease,opacity 0.2s ease;mix-blend-mode:difference;}
+        #cursor-ring{position:fixed;top:0;left:0;width:32px;height:32px;border:1px solid rgba(245,230,66,0.6);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width 0.15s ease,height 0.15s ease,border-color 0.2s ease,border-radius 0.2s ease;}
+        #cursor.hover{width:6px;height:6px;}
+        #cursor-ring.hover{width:44px;height:44px;border-color:rgba(245,230,66,0.9);}
+        #cursor.click{width:4px;height:4px;background:#fff;}
+        #cursor-ring.click{width:22px;height:22px;}
+
+        .mn-video{width:100%;margin-top:8px;}
+        .mn-video video{width:100%;display:block;border-radius:2px;}
+    </style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<nav>
+    <div class="nav-links"><a href="#hero" id="navHome">HOME</a><a id="navWorks">WORKS</a><a href="#about-me" id="navAbout">ABOUT</a></div>
+    <a href="#about-me" class="nav-contact" onclick="[worksOverlay,catOverlay].forEach(function(o){if(o)o.classList.remove('open')});document.body.style.overflow='';">CONTACT</a>
+</nav>
+
+<section class="hero" id="hero">
+    <span class="corner-left">A COLLECTION OF VISUAL WORKS</span>
+    <span class="corner-right">MARTA CALEJA 2026</span>
+    <div class="scene" id="scene">
+        <div class="card" data-i="0"><span class="card-number">01</span><div class="card-title">Motion</div><div class="card-sub">3D &amp; Film</div></div>
+        <div class="card" data-i="1"><span class="card-number">02</span><div class="card-title">Editorial</div><div class="card-sub">Print &amp; Layout</div></div>
+        <div class="card" data-i="2"><span class="card-number">03</span><div class="card-title">Branding</div><div class="card-sub">Identity Systems</div></div>
+        <div class="card" data-i="3"><span class="card-number">04</span><div class="card-title">Digital</div><div class="card-sub">Web &amp; Interactive</div></div>
+        <div class="card" data-i="4"><span class="card-number">05</span><div class="card-title">Programming</div><div class="card-sub">Code &amp; Dev</div></div>
+        <div class="wallet" id="wallet"><div class="wallet-slot"></div><div class="wallet-logo">PORTFOLIO</div><div class="wallet-ridge"></div></div>
+    </div>
+    <div class="scroll-hint"><span>SCROLL TO EXPLORE</span><div class="scroll-arrow"></div></div>
+</section>
+
+<section class="about-section" id="about">
+    <div class="about-scroll"><div class="about-snap-1">
+        <div class="about-card-wrap"><div class="flip-card">
+            <div class="flip-front">
+                <div class="front-topbar"><span>&#9632;</span><span>ABOUT</span><span>&#9632;</span></div>
+                <div class="front-left"><div class="about-mini-card" id="aboutCard"><span class="mini-card-number" id="miniNum">01</span><div class="mini-card-title" id="miniTitle">Motion</div><div class="mini-card-sub" id="miniSub">3D &amp; Film</div></div></div>
+                <div class="front-right">
+                    <div><div class="does-title">Marta Caleja<br>does</div><div class="does-cycling"><span class="does-word active">branding</span><span class="does-word">editorial</span><span class="does-word">motion &amp; 3D</span><span class="does-word">digital</span><span class="does-word">programming</span></div></div>
+                    <p class="front-bio">I&#39;m a Design and Multimedia student creating visual and interactive experiences with intention, exploring how design, narrative, and interaction shape perception and engagement.</p>
+                    <div class="front-hint">Hover to explore</div>
+                </div>
+                <div class="front-botbar"><span>&#9632;</span><span>PORTO, PT</span><span>DESIGN &amp; MULTIMEDIA</span><span>2026</span></div>
+            </div>
+            <div class="flip-back"><span class="back-label">Want to know more?</span><a href="#about-me" class="back-readmore">READ MORE</a><span class="back-sub">About me &#8594;</span></div>
+        </div></div>
+        <div class="about-scroll-hint"><span>SCROLL</span><div class="about-scroll-arrow"></div></div>
+    </div></div>
+</section>
+
+<section class="aboutme-section" id="about-me">
+    <div class="aboutme-inner"><h2 class="am-title">Marta Caleja</h2>
+        <div class="papers-stage">
+            <img src="imagens/minhafotoport.png" class="float-photo" alt="Marta Caleja">
+            <div class="paper" id="p0" style="left:0px;top:20px;--r:-2deg;z-index:2"><div class="paper-pin"></div><div class="paper-tag">WHO</div><p class="paper-text">Student of Design<br>and Multimedia<br><strong>University of Coimbra</strong></p><p class="paper-text" style="margin-top:14px">Born 2005<br><strong>Vila Real, Portugal</strong></p></div>
+            <div class="paper paper-wide" id="p1" style="left:260px;top:0px;--r:1deg;z-index:2"><div class="paper-pin"></div><div class="paper-tag">BIO</div><p class="paper-text">My work sits at the intersection of design, digital media, and communication, exploring how visuals, interaction, and narrative can shape perception and engagement.</p><p class="paper-text" style="margin-top:32px">I see design as a strategic tool: a way to give form to messages, guide attention, and create meaningful relationships between brands, systems, and users.</p></div>
+            <div class="paper" id="p2" style="left:790px;top:10px;--r:2.5deg;z-index:2"><div class="paper-pin"></div><div class="paper-tag">CONTACT</div><a href="#" onclick="window.location='mail'+('to:martacaleja'+('a@gmail.com'));return false;" class="paper-link"><span class="link-icon">&#9993;</span><span id="emailTxt">martacalejaa&#64;gmail.com</span></a><a href="https://instagram.com/marta_caleja" target="_blank" class="paper-link"><span class="link-icon">&#9672;</span>@marta_caleja</a><a href="https://www.linkedin.com/in/marta-caleja-4355343b3/" target="_blank" class="paper-link"><span class="link-icon">in</span>LinkedIn</a><a href="tel:+351934358784" class="paper-link"><span class="link-icon">&#9990;</span>+351 934 358 784</a></div>
+            <div class="paper paper-accent" id="p3" style="left:0px;top:290px;--r:-1.5deg;z-index:2"><div class="paper-pin paper-pin-dark"></div><div class="paper-tag paper-tag-dark">RESUME</div><p class="paper-text-dark">Want to see my full CV?</p><a href="https://drive.google.com/file/d/18kza_Do7U4r-qQb5IgJVvn3KcLxCEgmn/view?usp=sharing" class="resume-btn" target="_blank">DOWNLOAD CV <span>&#8594;</span></a><p class="paper-text-dark" style="margin-top:16px;font-size:9px;opacity:0.45">Updated 2026</p></div>
+        </div></div>
+</section>
+
+<section class="skills-section">
+    <div class="skills-inner"><div class="scrunch-wrap">
+        <div class="scrunch-closed">
+            <img src="imagens/papel.png" class="crumple-img" alt="crumpled paper">
+        </div>
+        <span class="scrunch-label">hover to unfold</span>
+        <div class="paper-flip-wrap"><div class="paper-flipper" id="paperFlipper">
+            <div class="paper-face">
+                <div class="skills-grid">
+                    <div><div class="sk-col-title">Skillsets</div><div class="sk-row"><span class="sk-num">01</span><span class="sk-name">Branding</span></div><div class="sk-row"><span class="sk-num">02</span><span class="sk-name">Visual Communication</span></div><div class="sk-row"><span class="sk-num">03</span><span class="sk-name">Web &amp; Interface Design</span></div><div class="sk-row"><span class="sk-num">04</span><span class="sk-name">Illustration</span></div><div class="sk-row"><span class="sk-num">05</span><span class="sk-name">Typography</span></div><div class="sk-row"><span class="sk-num">06</span><span class="sk-name">Programming</span></div><div class="sk-row"><span class="sk-num">07</span><span class="sk-name">Interaction Design</span></div><div class="sk-row"><span class="sk-num">08</span><span class="sk-name">3D Modeling &amp; Render</span></div></div>
+                    <div><div class="sk-col-title">Software</div><div class="sk-soft">Blender</div><div class="sk-soft">SketchBook</div><div class="sk-soft">Adobe Photoshop</div><div class="sk-soft">Adobe Illustrator</div><div class="sk-soft">Adobe InDesign</div><div class="sk-soft">Adobe After Effects</div><div class="sk-soft">Adobe Premiere Pro</div><div class="sk-soft">Procreate</div></div>
+                    <div><div class="sk-col-title">Languages</div><div class="sk-lang">Portuguese<span class="sk-level">&#8212; Native</span></div><div class="sk-lang">English<span class="sk-level">&#8212; Advanced</span></div><div class="sk-lang">Spanish<span class="sk-level">&#8212; Basic</span></div></div>
+                </div>
+                <div class="paper-click-hint">CLICK TO FLIP &#8594;</div>
+            </div>
+            <div class="paper-face paper-back">
+                <div class="edu-title">Education</div>
+                <div class="edu-block"><div class="edu-period">2020 &#8212; 2023</div><div class="edu-degree">Secondary in Visual Arts</div><div class="edu-school">Escola Secund&#225;ria Camilo Castelo Branco<br>Vila Real</div></div>
+                <div class="edu-block"><div class="edu-period">2023 &#8212; Present</div><div class="edu-degree">Bachelor&#39;s in Design and Multimedia</div><div class="edu-school">Faculdade de Ci&#234;ncias e Tecnologia<br>Universidade de Coimbra</div></div>
+                <div class="paper-click-hint">&#8592; CLICK TO FLIP BACK</div>
+            </div>
+        </div></div>
+    </div></div></div>
+</section>
+
+<!-- WORKS OVERLAY -->
+<div class="works-overlay" id="worksOverlay">
+    <button class="works-close" id="worksClose">&#10005; CLOSE</button>
+    <div class="works-heading">SELECT A CATEGORY</div>
+    <span class="works-label-l">MARTA CALEJA</span><span class="works-label-r">PORTFOLIO 2026</span>
+    <div class="slots-grid">
+        <div class="slot" data-cat="motion"><div class="slot-pocket"></div><div class="slot-card"><span class="slot-num">01</span><div class="slot-title">Motion</div><div class="slot-sub">3D &amp; Film</div><span class="slot-arrow">&#8594;</span></div></div>
+        <div class="slot" data-cat="editorial"><div class="slot-pocket"></div><div class="slot-card"><span class="slot-num">02</span><div class="slot-title">Editorial</div><div class="slot-sub">Print &amp; Layout</div><span class="slot-arrow">&#8594;</span></div></div>
+        <div class="slot" data-cat="branding"><div class="slot-pocket"></div><div class="slot-card"><span class="slot-num">03</span><div class="slot-title">Branding</div><div class="slot-sub">Identity Systems</div><span class="slot-arrow">&#8594;</span></div></div>
+        <div class="slot" data-cat="digital"><div class="slot-pocket"></div><div class="slot-card"><span class="slot-num">04</span><div class="slot-title">Digital</div><div class="slot-sub">Web &amp; Interactive</div><span class="slot-arrow">&#8594;</span></div></div>
+        <div class="slot slot-wide" data-cat="programming"><div class="slot-pocket"></div><div class="slot-card"><span class="slot-num">05</span><div class="slot-title">Programming</div><div class="slot-sub">Code &amp; Dev</div><span class="slot-arrow">&#8594;</span></div></div>
+    </div>
+</div>
+
+<!-- CAT OVERLAY -->
+<div class="cat-overlay" id="catOverlay">
+    <div class="cat-top">
+        <button class="cat-back-btn" id="catBack">Back to Works</button>
+        <div class="cat-num" id="catNum">01</div>
+        <h1 class="cat-big-title" id="catTitle">Motion</h1>
+    </div>
+    <div class="cat-list-header"><span class="cat-list-header-left">Project Title</span><span class="cat-list-header-right">Preview</span></div>
+    <div id="catList"></div>
+    <div class="cat-overlay-footer">
+        <button class="cat-overlay-footer-back" id="catFooterBack">Back to Works</button>
+        <span class="cat-overlay-footer-copy">Marta Caleja &mdash; 2026</span>
+    </div>
+</div>
+
+<!-- PROJ: Nail Salon 3D -->
+<div class="proj-overlay" id="projNailSalon">
+
+    <div class="proj-header">
+        <button class="proj-back-btn proj-back-all">Back</button>
+    </div>
+
+    <div class="mn-layout">
+        <div class="mn-col-info">
+            <span class="proj-cat-label">Motion</span>
+            <h1 class="proj-name" style="margin-top:10px">Nail Salon &mdash; 3D Environment</h1>
+            <span class="proj-year" style="display:block;margin-top:8px">2025</span>
+
+            <div class="mn-divider"></div>
+
+            <p class="proj-desc-text">Developed for the Computa&#231;&#227;o Gr&#225;fica course, this project explores modelling, texturing, lighting and animation through the creation of an animated 3D nail salon environment in Blender.</p>
+            <p class="proj-desc-text" style="margin-top:14px">Several animated elements bring dynamism to the scene: a central cream package follows the camera while rotating, a chair spins, a nail polish bottle falls with natural interpolation, and desk lamps flicker with animated intensity. An HDRI environment map provides global illumination alongside the artificial lights.</p>
+            <p class="proj-desc-text" style="margin-top:14px">The aesthetic is inspired by a modern nail salon, using soft tones of green, pink and gold. Textures were applied using albedo, normal and elevation maps for key objects to enhance surface detail and realism.</p>
+
+            <div class="proj-tags" style="margin-top:24px">
+                <span class="proj-tag">3D</span><span class="proj-tag">Blender</span><span class="proj-tag">Animation</span><span class="proj-tag">Lighting</span><span class="proj-tag">Texturing</span>
+            </div>
+
+            <div class="mn-divider"></div>
+
+            <div class="proj-meta">
+                <div class="proj-meta-item"><div class="proj-meta-label">Year</div><div class="proj-meta-value">2025</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Category</div><div class="proj-meta-value">Motion &middot; 3D</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Tools</div><div class="proj-meta-value">Blender<br>BlenderKit</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Context</div><div class="proj-meta-value">University Project<br>Computa&#231;&#227;o Gr&#225;fica</div></div>
+            </div>
+        </div>
+
+        <div class="mn-col-imgs">
+            <div class="mn-block">
+                <div class="mn-img-single">
+                    <img src="imagens/blender1.jpg" alt="Scene Render">
+                    <div class="mn-caption">Scene Render</div>
+                </div>
+            </div>
+            <div class="mn-block">
+                <div class="mn-img-single">
+                    <img src="imagens/blender2.jpg" alt="Texture Detail">
+                    <div class="mn-caption">Texture Detail</div>
+                </div>
+            </div>
+            <div class="mn-block">
+                <video controls style="width:100%;display:block;border-radius:2px;background:#000;">
+                    <source src="videos/Blender.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="proj-footer">
+        <button class="proj-back-btn proj-back-all">Back</button>
+        <span class="proj-footer-copy">Marta Caleja &mdash; 2026</span>
+    </div>
+</div>
+
+<!-- PROJ: Music Video -->
+<div class="proj-overlay" id="projMusicVideo">
+
+    <div class="proj-header">
+        <button class="proj-back-btn proj-back-all">Back</button>
+    </div>
+
+    <div class="mn-layout">
+        <div class="mn-col-info">
+            <span class="proj-cat-label">Motion</span>
+            <h1 class="proj-name" style="margin-top:10px">Music Video</h1>
+            <span class="proj-year" style="display:block;margin-top:8px">2025</span>
+
+            <div class="mn-divider"></div>
+
+            <p class="proj-desc-text">This music video explores the sensory impact of techno music on the body and mind. Through a visually intense narrative, it represents how electronic timbres and rhythms transport, confuse and envelop us.</p>
+            <p class="proj-desc-text" style="margin-top:14px">The journey between reality and memory is marked by fast cuts and visual effects that reflect the altered state provoked by sound. The project was born from a personal connection with the chosen music, composed by a friend, and aims to visually translate the emotional and physical experience that techno awakens.</p>
+
+            <div class="proj-tags" style="margin-top:24px">
+                <span class="proj-tag">Music Video</span><span class="proj-tag">Audiovisual</span><span class="proj-tag">Editing</span><span class="proj-tag">Visual Effects</span>
+            </div>
+
+            <div class="mn-divider"></div>
+
+            <div class="proj-meta">
+                <div class="proj-meta-item"><div class="proj-meta-label">Year</div><div class="proj-meta-value">2025</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Category</div><div class="proj-meta-value">Motion &middot; Audiovisual</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Tools</div><div class="proj-meta-value">Adobe Premiere Pro<br>Adobe After Effects</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Context</div><div class="proj-meta-value">University Project<br>Produ&#231;&#227;o Audiovisual<br>Group Work &mdash; 2 people</div></div>
+            </div>
+        </div>
+
+        <div class="mn-col-imgs">
+            <div class="mn-block">
+                <video controls style="width:100%;display:block;border-radius:2px;background:#000;">
+                    <source src="videos/Videoclip.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="proj-footer">
+        <button class="proj-back-btn proj-back-all">Back</button>
+        <span class="proj-footer-copy">Marta Caleja &mdash; 2026</span>
+    </div>
+</div>
+
+<!-- PROJ: Fusion Market -->
+<div class="proj-overlay" id="projFusion">
+    <div class="proj-header"><button class="proj-back-btn proj-back-all">Back</button><div class="proj-info"><span class="proj-cat-label">Editorial</span><h1 class="proj-name">Fusion Market &mdash; Event Brochure</h1><span class="proj-year">2024</span></div></div>
+    <div class="proj-intro"><div><div class="proj-desc-title">About the Project</div><p class="proj-desc-text">Developed for the Tipografia course, this project consisted of designing a folded A3 brochure to promote a multicultural market event in Coimbra called Fusion Market, where different cultures, traditions and experiences come together.</p><p class="proj-desc-text" style="margin-top:14px">The design combines dynamic typography with a structured layout that guides the reader through the event information: programme, activities, location and contact details. Particular attention was given to typographic hierarchy and readability.</p><div class="proj-tags"><span class="proj-tag">Editorial</span><span class="proj-tag">Print</span><span class="proj-tag">Typography</span><span class="proj-tag">Brochure</span></div></div>
+        <div class="proj-meta"><div class="proj-meta-item"><div class="proj-meta-label">Year</div><div class="proj-meta-value">2024</div></div><div class="proj-meta-item"><div class="proj-meta-label">Category</div><div class="proj-meta-value">Editorial &middot; Print</div></div><div class="proj-meta-item"><div class="proj-meta-label">Tools</div><div class="proj-meta-value">Adobe InDesign<br>Adobe Illustrator</div></div><div class="proj-meta-item"><div class="proj-meta-label">Context</div><div class="proj-meta-value">University Project<br>Tipografia</div></div></div></div>
+    <div style="padding:0 60px 60px;">
+        <div class="mn-img-single" style="width:65%;margin:0 auto 32px;">
+            <img src="imagens/fusion1.png" alt="Fusion Market" style="width:100%;display:block;object-fit:contain;">
+            <div class="mn-caption">Brochure — Front</div>
+        </div>
+        <div class="mn-img-single" style="width:65%;margin:0 auto;">
+            <img src="imagens/fusion2.png" alt="Fusion Market" style="width:100%;display:block;object-fit:contain;">
+            <div class="mn-caption">Brochure — Back</div>
+        </div>
+    </div>
+    <div class="proj-footer"><button class="proj-back-btn proj-back-all">Back</button><span class="proj-footer-copy">Marta Caleja &mdash; 2026</span></div>
+</div>
+
+<!-- PROJ: Monegros -->
+<div class="proj-overlay" id="projMonegros">
+
+    <div class="proj-header">
+        <button class="proj-back-btn proj-back-all">Back</button>
+    </div>
+
+    <div class="mn-layout">
+
+        <!-- COLUNA ESQUERDA: toda a info -->
+        <div class="mn-col-info">
+            <span class="proj-cat-label">Branding</span>
+            <h1 class="proj-name" style="margin-top:10px">Rebranding of the Festival Monegros</h1>
+            <span class="proj-year" style="display:block;margin-top:8px">2024</span>
+
+            <div class="mn-divider"></div>
+
+            <p class="proj-desc-text">This project was developed for Projeto 1 and focused on creating the visual identity for an electronic and underground music festival. The main objective was to design an identity that reflects values such as unity, diversity, and connection.</p>
+            <p class="proj-desc-text" style="margin-top:14px">During the creative process, we explored several logo concepts and visual approaches. We realised that the essence of the festival was rooted in bringing different people, styles, and perspectives together — so we decided to merge multiple ideas into one dynamic logo, symbolising diversity and creative fusion.</p>
+            <p class="proj-desc-text" style="margin-top:14px">The final logo features distorted and expressive typography that conveys movement, energy, and intensity. The colour palette combines warm tones to express passion and intensity, balanced with cool and neutral colours for visual harmony.</p>
+
+            <div class="proj-tags" style="margin-top:24px">
+                <span class="proj-tag">Branding</span><span class="proj-tag">Visual Identity</span><span class="proj-tag">Logo Design</span><span class="proj-tag">Print</span>
+            </div>
+
+            <div class="mn-divider"></div>
+
+            <div class="mn-divider"></div>
+
+            <span class="mn-proj-link-label">Website Prototype</span>
+            <a href="https://www.figma.com/proto/SFyfn2kWCcDx0onzXBfHvw/Untitled?node-id=42-109&t=cuGaOTrCNrE1Hvob-1&scaling=min-zoom" target="_blank" class="mn-proj-link">Open Figma &#8599;</a>
+
+            <div class="mn-divider"></div>
+
+            <div class="proj-meta">
+                <div class="proj-meta-item"><div class="proj-meta-label">Year</div><div class="proj-meta-value">2024</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Category</div><div class="proj-meta-value">Branding &middot; Visual Identity</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Tools</div><div class="proj-meta-value">Adobe Illustrator<br>Adobe Photoshop<br>Figma</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Context</div><div class="proj-meta-value">University Project<br>Group Work &mdash; 4 people</div></div>
+            </div>
+        </div>
+
+        <!-- COLUNA DIREITA: imagens -->
+        <div class="mn-col-imgs">
+
+            <div class="mn-block">
+                <div class="mn-img-single">
+                    <img src="imagens/MStipo.jpg" alt="Typography">
+                    <div class="mn-caption">Typography &amp; Brand Language</div>
+                </div>
+            </div>
+
+            <div class="mn-block">
+                <div class="mn-img-single">
+                    <img src="imagens/MSpalete.jpg" alt="Colour Palette">
+                    <div class="mn-caption">Colour Palette</div>
+                </div>
+            </div>
+
+            <div class="mn-block">
+                <div class="mn-img-single">
+                    <img src="imagens/MScard.jpg" alt="Brand Mark">
+                    <div class="mn-caption">Brand Mark</div>
+                </div>
+            </div>
+
+            <div class="mn-block">
+                <div class="mn-pair" style="width:80%;margin:0 auto;">
+                    <div class="mn-pair-item">
+                        <img src="imagens/MScartaz1.png" alt="Poster 1" style="width:100%;height:560px;object-fit:contain;display:block;">
+                        <div class="mn-caption">Poster 01</div>
+                    </div>
+                    <div class="mn-pair-item">
+                        <img src="imagens/MScartaz2.png" alt="Poster 2" style="width:100%;height:560px;object-fit:contain;display:block;">
+                        <div class="mn-caption">Poster 02</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mn-block">
+                <div class="mn-pair" style="width:80%;margin:0 auto;">
+                    <div class="mn-pair-item">
+                        <img src="imagens/MScartaz3.png" alt="Poster 3" style="width:100%;height:560px;object-fit:contain;display:block;">
+                        <div class="mn-caption">Poster 03</div>
+                    </div>
+                    <div class="mn-pair-item">
+                        <img src="imagens/MScartaz4.png" alt="Poster 4" style="width:100%;height:560px;object-fit:contain;display:block;">
+                        <div class="mn-caption">Poster 04</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="proj-footer">
+        <button class="proj-back-btn proj-back-all">Back</button>
+        <span class="proj-footer-copy">Marta Caleja &mdash; 2026</span>
+    </div>
+</div>
+
+<!-- PROJ: Centro Paisagistico -->
+<div class="proj-overlay" id="projCentro">
+
+    <div class="proj-header">
+        <button class="proj-back-btn proj-back-all">Back</button>
+    </div>
+
+    <div class="mn-layout">
+        <div class="mn-col-info">
+            <span class="proj-cat-label">Branding</span>
+            <h1 class="proj-name" style="margin-top:10px">Visual Identity &mdash; Centro Paisag&#237;stico</h1>
+            <span class="proj-year" style="display:block;margin-top:8px">2024</span>
+
+            <div class="mn-divider"></div>
+
+            <p class="proj-desc-text">Visual identity system for a cultural institution inspired by the painting Houses at Chatou by Vlaminck. The project explores how colours extracted from the artwork could be translated into a contemporary design system.</p>
+            <p class="proj-desc-text" style="margin-top:14px">The logo was designed with simplicity and elegance using the Garamond typeface, evoking tradition, refinement and cultural heritage. The identity includes an extended colour palette, graphic patterns and several application supports.</p>
+
+            <div class="proj-tags" style="margin-top:24px">
+                <span class="proj-tag">Branding</span><span class="proj-tag">Visual Identity</span><span class="proj-tag">Logo Design</span><span class="proj-tag">Cultural</span>
+            </div>
+
+            <div class="mn-divider"></div>
+
+            <div class="proj-meta">
+                <div class="proj-meta-item"><div class="proj-meta-label">Year</div><div class="proj-meta-value">2024</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Category</div><div class="proj-meta-value">Branding &middot; Visual Identity</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Tools</div><div class="proj-meta-value">Adobe Illustrator<br>Adobe InDesign</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Context</div><div class="proj-meta-value">University Project<br>Group Work</div></div>
+            </div>
+        </div>
+
+        <div class="mn-col-imgs">
+
+            <!-- logos: 3 em linha -->
+            <div class="mn-block">
+                <div class="mn-trio">
+                    <div class="mn-trio-item"><img src="imagens/paisagem1.jpg" alt="Logo 1"><div class="mn-caption">Logo 01</div></div>
+                    <div class="mn-trio-item"><img src="imagens/paisagem2.jpg" alt="Logo 2"><div class="mn-caption">Logo 02</div></div>
+                    <div class="mn-trio-item"><img src="imagens/paisagem3.jpg" alt="Logo 3"><div class="mn-caption">Logo 03</div></div>
+                </div>
+            </div>
+
+            <!-- padroes: 2+2 -->
+            <div class="mn-block">
+                <div class="mn-pair" style="width:70%;margin:0 auto;">
+                    <div class="mn-pair-item"><img src="imagens/padrao1.jpg" alt="Pattern 1"><div class="mn-caption">Pattern 01</div></div>
+                    <div class="mn-pair-item"><img src="imagens/padrao2.jpg" alt="Pattern 2"><div class="mn-caption">Pattern 02</div></div>
+                </div>
+            </div>
+            <div class="mn-block">
+                <div class="mn-pair" style="width:70%;margin:0 auto;">
+                    <div class="mn-pair-item"><img src="imagens/padrao3.jpg" alt="Pattern 3"><div class="mn-caption">Pattern 03</div></div>
+                    <div class="mn-pair-item"><img src="imagens/padrao4.jpg" alt="Pattern 4"><div class="mn-caption">Pattern 04</div></div>
+                </div>
+            </div>
+
+            <!-- suportes: 3 lado a lado -->
+            <div class="mn-block">
+                <div class="mn-trio">
+                    <div class="mn-trio-item"><img src="imagens/suporte1.jpg" alt="Support 1"><div class="mn-caption">Application 01</div></div>
+                    <div class="mn-trio-item"><img src="imagens/suporte2.png" alt="Support 2"><div class="mn-caption">Application 02</div></div>
+                    <div class="mn-trio-item"><img src="imagens/suporte3.png" alt="Support 3"><div class="mn-caption">Application 03</div></div>
+                </div>
+            </div>
+
+            <!-- cartas: 2 lado a lado -->
+            <div class="mn-block">
+                <div class="mn-pair" style="width:70%;margin:0 auto;">
+                    <div class="mn-pair-item"><img src="imagens/carta1.png" alt="Menu Card 1" style="height:280px"><div class="mn-caption">Menu Card 01</div></div>
+                    <div class="mn-pair-item"><img src="imagens/carta2.png" alt="Menu Card 2" style="height:280px"><div class="mn-caption">Menu Card 02</div></div>
+                </div>
+            </div>
+
+            <!-- rua: 2 lado a lado -->
+            <div class="mn-block">
+                <div class="mn-pair" style="width:70%;margin:0 auto;">
+                    <div class="mn-pair-item"><img src="imagens/rua1.png" alt="Outdoor 1" style="height:280px"><div class="mn-caption">Outdoor 01</div></div>
+                    <div class="mn-pair-item"><img src="imagens/rua2.png" alt="Outdoor 2" style="height:280px"><div class="mn-caption">Outdoor 02</div></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="proj-footer">
+        <button class="proj-back-btn proj-back-all">Back</button>
+        <span class="proj-footer-copy">Marta Caleja &mdash; 2026</span>
+    </div>
+</div>
+
+<!-- PROJ: Lamb to the Slaughter -->
+<div class="proj-overlay" id="projLamb">
+
+    <div class="proj-header">
+        <button class="proj-back-btn proj-back-all">Back</button>
+    </div>
+
+    <div class="mn-layout">
+
+        <!-- COLUNA ESQUERDA -->
+        <div class="mn-col-info">
+            <span class="proj-cat-label">Digital</span>
+            <h1 class="proj-name" style="margin-top:10px">Lamb to the Slaughter &mdash; Interactive Web Album</h1>
+            <span class="proj-year" style="display:block;margin-top:8px">2025</span>
+
+            <div class="mn-divider"></div>
+
+            <p class="proj-desc-text">Developed for the Aplica&#231;&#245;es Multim&#233;dia course and inspired by Roald Dahl&#39;s short story, this project is an interactive multimedia object that explores the narrative through visual design, illustration, sound and interaction.</p>
+            <p class="proj-desc-text" style="margin-top:14px">The concept is based on a domestic object that hides a darker meaning, reflecting the ironic tone of the story. The visual language draws from 1950s aesthetics — delicate and nostalgic elements combined with subtle references to violence and tension. The colour palette is mostly black and white, with colour appearing only in specific elements to highlight key narrative moments.</p>
+            <p class="proj-desc-text" style="margin-top:14px">The final result is an interactive digital photo album where images, illustrations, sounds and visual effects guide the user through the narrative. Hover effects, sound feedback and animated transitions create an immersive experience.</p>
+
+            <div class="proj-tags" style="margin-top:24px">
+                <span class="proj-tag">Interactive</span><span class="proj-tag">Web Design</span><span class="proj-tag">Illustration</span><span class="proj-tag">Sound Design</span><span class="proj-tag">HTML/CSS/JS</span>
+            </div>
+
+            <div class="mn-divider"></div>
+
+            <div class="mn-divider"></div>
+
+            <span class="mn-proj-link-label">Live Website</span>
+            <a href="https://lambtotheslaughter.vercel.app/" target="_blank" class="mn-proj-link">Visit Project &#8599;</a>
+
+            <div class="mn-divider"></div>
+
+            <div class="proj-meta">
+                <div class="proj-meta-item"><div class="proj-meta-label">Year</div><div class="proj-meta-value">2025</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Category</div><div class="proj-meta-value">Digital &middot; Interactive</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Tools</div><div class="proj-meta-value">HTML / CSS / JS<br>Adobe Photoshop<br>Adobe Lightroom<br>SketchBook<br>Audacity</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Context</div><div class="proj-meta-value">University Project<br>Aplica&#231;&#245;es Multim&#233;dia</div></div>
+            </div>
+        </div>
+
+        <!-- COLUNA DIREITA: imagens -->
+        <div class="mn-col-imgs">
+
+            <div class="mn-block">
+                <div class="mn-img-single">
+                    <img src="imagens/Lamb1.jpg" alt="Album Cover">
+                    <div class="mn-caption">Album Cover</div>
+                </div>
+            </div>
+
+            <div class="mn-block">
+                <div class="mn-img-single" style="width:25%">
+                    <img src="imagens/Lamb2.jpg" alt="Photo">
+                    <div class="mn-caption">Photo 01</div>
+                </div>
+            </div>
+
+            <div class="mn-block">
+                <div class="mn-img-single">
+                    <img src="imagens/Lamb3.jpg" alt="Photo">
+                    <div class="mn-caption">Photo 02</div>
+                </div>
+            </div>
+
+            <div class="mn-block">
+                <div class="mn-img-single">
+                    <img src="imagens/Lamb4.jpg" alt="Edit">
+                    <div class="mn-caption">Edit 01</div>
+                </div>
+            </div>
+
+            <div class="mn-block">
+                <div class="mn-img-single">
+                    <img src="imagens/Lamb5.jpg" alt="Photo">
+                    <div class="mn-caption">Photo 03</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="proj-footer">
+        <button class="proj-back-btn proj-back-all">Back</button>
+        <span class="proj-footer-copy">Marta Caleja &mdash; 2026</span>
+    </div>
+</div>
+
+<!-- PROJ: Pizza Delivery Disaster -->
+<div class="proj-overlay" id="projPizza">
+
+    <div class="proj-header">
+        <button class="proj-back-btn proj-back-all">Back</button>
+    </div>
+
+    <div class="mn-layout">
+        <div class="mn-col-info">
+            <span class="proj-cat-label">Programming</span>
+            <h1 class="proj-name" style="margin-top:10px">Pizza Delivery Disaster</h1>
+            <span class="proj-year" style="display:block;margin-top:8px">2024</span>
+
+            <div class="mn-divider"></div>
+
+            <p class="proj-desc-text">A pixel-art game inspired by Cubway, where a pizza delivery girl navigates four increasingly difficult levels to reach her destination.</p>
+            <p class="proj-desc-text" style="margin-top:14px">The game features a main menu, level select with locked/unlocked progression, a 60-second timer on the final level, a Game Over screen and a completion screen. Movement is controlled with WASD or arrow keys.</p>
+            <p class="proj-desc-text" style="margin-top:14px">All visual assets were hand-drawn in pixel art style, giving the game a personal and crafted feel.</p>
+
+            <div class="proj-tags" style="margin-top:24px">
+                <span class="proj-tag">Game Dev</span><span class="proj-tag">Pixel Art</span><span class="proj-tag">Processing</span><span class="proj-tag">Programming</span>
+            </div>
+
+            <div class="mn-divider"></div>
+
+            <div class="proj-meta">
+                <div class="proj-meta-item"><div class="proj-meta-label">Year</div><div class="proj-meta-value">2024</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Category</div><div class="proj-meta-value">Game Dev &middot; Programming</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Tools</div><div class="proj-meta-value">Processing</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Context</div><div class="proj-meta-value">University Project<br>Group Work</div></div>
+            </div>
+        </div>
+
+        <div class="mn-col-imgs">
+            <!-- main menu sozinho -->
+            <div class="mn-block">
+                <div class="mn-img-single">
+                    <img src="imagens/pizza1.jpg" alt="Main Menu">
+                    <div class="mn-caption">Main Menu</div>
+                </div>
+            </div>
+            <!-- level 1 + level 2 -->
+            <div class="mn-block">
+                <div class="mn-pair" style="width:80%;margin:0 auto;">
+                    <div class="mn-pair-item"><img src="imagens/pizza2.jpg" alt="Level 1"><div class="mn-caption">Level 01</div></div>
+                    <div class="mn-pair-item"><img src="imagens/pizza3.jpg" alt="Level 2"><div class="mn-caption">Level 02</div></div>
+                </div>
+            </div>
+            <!-- level 3 + game over -->
+            <div class="mn-block">
+                <div class="mn-pair" style="width:80%;margin:0 auto;">
+                    <div class="mn-pair-item"><img src="imagens/pizza4.jpg" alt="Level 3"><div class="mn-caption">Level 03</div></div>
+                    <div class="mn-pair-item"><img src="imagens/pizza5.jpg" alt="Game Over"><div class="mn-caption">Game Over</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="proj-footer">
+        <button class="proj-back-btn proj-back-all">Back</button>
+        <span class="proj-footer-copy">Marta Caleja &mdash; 2026</span>
+    </div>
+</div>
+
+
+<script>
+    var activePaper=null,dStartX,dStartY,dOrigLeft,dOrigTop,maxZ=20;
+    document.querySelectorAll('.paper').forEach(function(paper){
+        paper.addEventListener('mousedown',function(e){
+            if(e.target.tagName==='A')return;
+            activePaper=paper;paper.classList.add('dragging');maxZ++;paper.style.zIndex=maxZ;
+            dStartX=e.clientX;dStartY=e.clientY;dOrigLeft=parseInt(paper.style.left)||0;dOrigTop=parseInt(paper.style.top)||0;
+            e.preventDefault();e.stopPropagation();
+        });
+    });
+    document.addEventListener('mousemove',function(e){if(!activePaper)return;activePaper.style.left=(dOrigLeft+e.clientX-dStartX)+'px';activePaper.style.top=(dOrigTop+e.clientY-dStartY)+'px';});
+    document.addEventListener('mouseup',function(){if(!activePaper)return;activePaper.classList.remove('dragging');activePaper=null;});
+    var scene=document.getElementById('scene'),wallet=document.getElementById('wallet');
+    var cards=Array.from(document.querySelectorAll('#scene .card'));
+    var N=5,CARD_W=260,GAP=50;
+    var ejectedX=[CARD_W,CARD_W+GAP,CARD_W+GAP*2,CARD_W+GAP*3,CARD_W+GAP*4];
+    var WALLET_X=-180,GLOW=['rgba(78,205,196,0.35)','rgba(255,107,107,0.35)','rgba(245,230,66,0.3)','rgba(251,146,60,0.35)','rgba(167,139,250,0.35)'];
+    var wX=0,cX=[0,0,0,0,0],cOp=[0,0,0,0,0],isOpen=false,floatY=0,floatT=0,lastTime=null;
+    function expoOut(t){return t>=1?1:1-Math.pow(2,-10*t);}
+    function backOut(t){var c=2.70158;return 1+c*Math.pow(t-1,3)+(c-1)*Math.pow(t-1,2);}
+    function applyWallet(){var rot=isOpen?0:Math.sin(floatT*1.5708)*3,sc=isOpen?1:1+Math.sin(floatT*1.5708+Math.PI)*0.015;wallet.style.transform='translateX('+wX+'px) translateY('+floatY+'px) rotate('+rot+'deg) scale('+sc+')';wallet.style.boxShadow=isOpen?'0 40px 100px rgba(0,0,0,.95),0 8px 30px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,0.06)':'0 '+(40+Math.sin(floatT*1.5708)*15)+'px '+(80+Math.sin(floatT*1.5708)*20)+'px rgba(0,0,0,.9),0 8px 30px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,0.06)';}
+    function applyCard(i){cards[i].style.transform='translateX('+cX[i]+'px)';cards[i].style.opacity=cOp[i];}
+    function floatLoop(now){if(!lastTime)lastTime=now;var dt=(now-lastTime)/1000;lastTime=now;if(!isOpen){floatT+=dt;floatY=Math.sin(floatT*1.5708)*22;}else{floatY=0;}applyWallet();requestAnimationFrame(floatLoop);}
+    requestAnimationFrame(floatLoop);
+    function animate(opts){var t0=performance.now();function tick(now){var p=Math.min((now-t0)/opts.duration,1);opts.onUpdate(opts.start+(opts.end-opts.start)*opts.easing(p));if(p<1)requestAnimationFrame(tick);else if(opts.onDone)opts.onDone();}requestAnimationFrame(tick);}
+    function open(){if(isOpen)return;isOpen=true;animate({start:wX,end:WALLET_X,duration:700,easing:expoOut,onUpdate:function(v){wX=v;}});for(var i=N-1;i>=0;i--){(function(ci){setTimeout(function(){cards[ci].style.pointerEvents='all';animate({start:0,end:ejectedX[ci],duration:700,easing:backOut,onUpdate:function(v){cX[ci]=v;applyCard(ci);}});animate({start:0,end:1,duration:400,easing:expoOut,onUpdate:function(v){cOp[ci]=v;applyCard(ci);}});},((N-1)-ci)*90);})(i);}}
+    function close(){if(!isOpen)return;isOpen=false;cards.forEach(function(c){c.style.filter='';c.style.boxShadow='';});for(var i=0;i<N;i++){(function(ci){setTimeout(function(){cards[ci].style.pointerEvents='none';animate({start:cX[ci],end:0,duration:600,easing:expoOut,onUpdate:function(v){cX[ci]=v;applyCard(ci);}});setTimeout(function(){animate({start:1,end:0,duration:300,easing:expoOut,onUpdate:function(v){cOp[ci]=v;applyCard(ci);}});},300);},ci*70);})(i);}setTimeout(function(){animate({start:wX,end:0,duration:700,easing:expoOut,onUpdate:function(v){wX=v;}});},250);}
+    scene.addEventListener('mouseenter',open);scene.addEventListener('mouseleave',close);
+    var SPREAD=90;
+    cards.forEach(function(card,i){
+        card.addEventListener('mouseenter',function(){if(!isOpen)return;cards.forEach(function(other,j){if(j===i){other.style.transition='transform 0.4s cubic-bezier(.16,1,.3,1),filter 0.3s,box-shadow 0.3s';other.style.transform='translateX('+ejectedX[i]+'px) scale(1.07)';other.style.filter='none';other.style.boxShadow='0 40px 80px rgba(0,0,0,.9),0 0 70px '+GLOW[i];other.style.zIndex=20;}else{var dir=j<i?-1:1;var extra=Math.abs(j-i)*SPREAD*dir;other.style.transition='transform 0.4s cubic-bezier(.16,1,.3,1),filter 0.3s';other.style.transform='translateX('+(ejectedX[j]+extra)+'px)';other.style.filter='brightness(0.28) blur(1.5px)';other.style.zIndex=5;other.style.boxShadow='none';}});});
+        card.addEventListener('mouseleave',function(){if(!isOpen)return;cards.forEach(function(other,j){other.style.transition='transform 0.5s cubic-bezier(.16,1,.3,1),filter 0.35s,box-shadow 0.35s';other.style.transform='translateX('+ejectedX[j]+'px)';other.style.filter='none';other.style.boxShadow='none';other.style.zIndex=9-j;});});
+    });
+    var aboutCard=document.getElementById('aboutCard'),miniNum=document.getElementById('miniNum'),miniTitle=document.getElementById('miniTitle'),miniSub=document.getElementById('miniSub');
+    var cardData=[
+        {num:'01',title:'Motion',sub:'3D & Film',bg:'linear-gradient(160deg,#4ecdc4,#0b5e5a)',color:'#fff'},
+        {num:'02',title:'Editorial',sub:'Print & Layout',bg:'linear-gradient(160deg,#ff6b6b,#a82020)',color:'#fff'},
+        {num:'03',title:'Branding',sub:'Identity Systems',bg:'linear-gradient(160deg,#f5e642,#c8a800)',color:'#111'},
+        {num:'04',title:'Digital',sub:'Web & Interactive',bg:'linear-gradient(160deg,#fb923c,#a83205)',color:'#fff'},
+        {num:'05',title:'Programming',sub:'Code & Dev',bg:'linear-gradient(160deg,#a78bfa,#4c1d95)',color:'#fff'}
+    ];
+    function updateCard(i){var d=cardData[i];aboutCard.style.background=d.bg;miniNum.textContent=d.num;miniTitle.textContent=d.title;miniSub.textContent=d.sub;miniTitle.style.color=d.color;miniSub.style.color=d.color;miniNum.style.color=d.color;}
+    updateCard(0);
+    var wordList=['branding','editorial','motion & 3D','digital','programming'];
+    var cyclingEl=document.querySelector('.does-cycling');
+    cyclingEl.innerHTML='<span class="does-word active" id="typeEl"></span>';
+    var typeEl=document.getElementById('typeEl'),wordIdx=0;
+    function type(text,cb){var i=0;typeEl.textContent='';var iv=setInterval(function(){typeEl.textContent+=text[i];i++;if(i>=text.length){clearInterval(iv);setTimeout(cb,1400);}},80);}
+    function erase(cb){var iv=setInterval(function(){var t=typeEl.textContent;if(t.length===0){clearInterval(iv);cb();}else{typeEl.textContent=t.slice(0,-1);}},50);}
+    function loop(){updateCard(wordIdx);type(wordList[wordIdx],function(){erase(function(){wordIdx=(wordIdx+1)%wordList.length;loop();});});}
+    loop();
+    document.getElementById('paperFlipper').addEventListener('click',function(){this.classList.toggle('flipped');});
+    var worksOverlay=document.getElementById('worksOverlay');
+    var catOverlay=document.getElementById('catOverlay');
+    var catTitle=document.getElementById('catTitle');
+    var catNum=document.getElementById('catNum');
+    var catList=document.getElementById('catList');
+    var heroCardCat=['motion','editorial','branding','digital','programming'];
+    var ALL_PROJ_IDS=['projNailSalon','projMusicVideo','projFusion','projMonegros','projCentro','projLamb','projPizza'];
+    var catBg={
+        motion:'linear-gradient(135deg,#020d0c 0%,#041a18 100%)',
+        editorial:'linear-gradient(135deg,#1a0505 0%,#2a0a0a 100%)',
+        branding:'linear-gradient(135deg,#0d0900 0%,#1f1600 100%)',
+        digital:'linear-gradient(135deg,#0d0800 0%,#211400 100%)',
+        programming:'linear-gradient(135deg,#0d0618 0%,#180a2e 100%)'
+    };
+    var catInfo={
+        motion:{title:'Motion',num:'01',projects:[
+                {id:'projNailSalon',title:'Nail Salon — 3D Environment',tags:['3D','Blender','Animation','2025']},
+                {id:'projMusicVideo',title:'Music Video',tags:['Audiovisual','Editing','Visual Effects','2025']}
+            ]},
+        editorial:{title:'Editorial',num:'02',projects:[
+                {id:'projFusion',title:'Fusion Market — Event Brochure',tags:['Editorial','Print','Typography','2024']}
+            ]},
+        branding:{title:'Branding',num:'03',projects:[
+                {id:'projMonegros',title:'Rebranding of the Festival Monegros',tags:['Branding','Visual Identity','2024']},
+                {id:'projCentro',title:'Visual Identity — Centro Paisagístico',tags:['Branding','Logo Design','2024']}
+            ]},
+        digital:{title:'Digital',num:'04',projects:[
+                {id:'projLamb',title:'Lamb to the Slaughter — Interactive Web Album',tags:['Interactive','Web Design','Illustration','2025']}
+            ]},
+        programming:{title:'Programming',num:'05',projects:[
+                {id:'projPizza',title:'Pizza Delivery Disaster',tags:['Game Dev','Pixel Art','Processing','2024']}
+            ]}
+    };
+    var currentCat='motion';
+    function allProjOverlays(){return ALL_PROJ_IDS.map(function(id){return document.getElementById(id);});}
+    function renderCatList(cat){
+        var info=catInfo[cat];
+        var bg=catBg[cat]||'#0a0a0a';
+        if(info.projects.length===0){catList.innerHTML='<div class="cat-empty">Coming soon</div>';return;}
+        var html='';
+        info.projects.forEach(function(proj){
+            html+='<div class="proj-row" data-proj="'+proj.id+'" style="background:'+bg+';">';
+            html+='<div class="proj-row-left"><div class="proj-row-title">'+proj.title+'</div><div class="proj-row-tags">';
+            proj.tags.forEach(function(t){html+='<span class="proj-row-tag">'+t+'</span>';});
+            html+='</div></div></div>';
+        });
+        catList.innerHTML=html;
+        catList.querySelectorAll('.proj-row').forEach(function(row){
+            row.addEventListener('click',function(){
+                var overlay=document.getElementById(row.getAttribute('data-proj'));
+                if(overlay){overlay.classList.add('open');overlay.scrollTop=0;}
+            });
+        });
+    }
+    function openCat(cat){
+        currentCat=cat;
+        catTitle.textContent=catInfo[cat].title;
+        catNum.textContent=catInfo[cat].num;
+        renderCatList(cat);
+        catOverlay.classList.add('open');
+        catOverlay.scrollTop=0;
+        document.body.style.overflow='hidden';
+    }
+    function goBackToWorks(){catOverlay.classList.remove('open');setTimeout(function(){worksOverlay.classList.add('open');},200);}
+    function goBackToCat(){allProjOverlays().forEach(function(o){o.classList.remove('open');});}
+    document.getElementById('catBack').addEventListener('click',goBackToWorks);
+    document.getElementById('catFooterBack').addEventListener('click',goBackToWorks);
+    document.querySelectorAll('.proj-back-all').forEach(function(btn){btn.addEventListener('click',goBackToCat);});
+    cards.forEach(function(card,i){card.addEventListener('click',function(){if(!isOpen)return;openCat(heroCardCat[i]);});});
+    document.querySelectorAll('.slot').forEach(function(slot){
+        slot.addEventListener('click',function(){
+            var cat=slot.getAttribute('data-cat');
+            var c=slot.querySelector('.slot-card');
+            c.classList.add('ejecting');
+            setTimeout(function(){worksOverlay.classList.remove('open');openCat(cat);c.classList.remove('ejecting');},380);
+        });
+    });
+    document.getElementById('navWorks').addEventListener('click',function(e){e.preventDefault();allProjOverlays().forEach(function(o){o.classList.remove('open');});catOverlay.classList.remove('open');worksOverlay.classList.add('open');document.body.style.overflow='hidden';});
+    document.getElementById('worksClose').addEventListener('click',function(){worksOverlay.classList.remove('open');document.body.style.overflow='';});
+    document.getElementById('navHome').addEventListener('click',function(e){e.preventDefault();[worksOverlay,catOverlay].concat(allProjOverlays()).forEach(function(o){o.classList.remove('open');});document.body.style.overflow='';window.scrollTo({top:0,behavior:'smooth'});});
+    document.getElementById('navAbout').addEventListener('click',function(){[worksOverlay,catOverlay].concat(allProjOverlays()).forEach(function(o){o.classList.remove('open');});document.body.style.overflow='';});
+    document.addEventListener('keydown',function(e){
+        if(e.key!=='Escape')return;
+        var anyProj=allProjOverlays().some(function(o){return o.classList.contains('open');});
+        if(anyProj){goBackToCat();}
+        else if(catOverlay.classList.contains('open')){goBackToWorks();}
+        else if(worksOverlay.classList.contains('open')){worksOverlay.classList.remove('open');document.body.style.overflow='';}
+    });
+
+    // Custom cursor
+    var cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+    var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+    document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+    (function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+    document.querySelectorAll('a,button,.slot,.card,.paper,.scrunch-wrap,.proj-row,.flip-card,.about-card-wrap').forEach(function(el){
+        el.addEventListener('mouseenter',function(){cur.classList.add('hover');ring.classList.add('hover');});
+        el.addEventListener('mouseleave',function(){cur.classList.remove('hover');ring.classList.remove('hover');});
+    });
+    document.addEventListener('mousedown',function(){cur.classList.add('click');ring.classList.add('click');});
+    document.addEventListener('mouseup',function(){cur.classList.remove('click');ring.classList.remove('click');});
+</script>
+</body>
+</html>
